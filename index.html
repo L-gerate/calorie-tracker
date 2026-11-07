@@ -65,7 +65,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* 顶部导航栏：Apple Health 风格 */
     header {
       display: flex;
       justify-content: space-between;
@@ -91,11 +90,10 @@
       font-weight: 600;
       cursor: pointer;
       box-shadow: var(--shadow);
-      transition: transform 0.15s ease, background 0.15s ease;
+      transition: transform 0.15s ease;
     }
     .pill-btn:active { transform: scale(0.95); }
 
-    /* 通用 Bento 卡片 */
     .card {
       background: var(--card);
       backdrop-filter: blur(20px);
@@ -107,7 +105,7 @@
       box-shadow: var(--shadow);
     }
 
-    /* 1. 核心数据看板（Apple Fitness 仪表盘风格） */
+    /* 1. 核心数据看板 */
     .hero-top {
       text-align: center;
       padding-bottom: 18px;
@@ -118,7 +116,6 @@
       font-weight: 600;
       color: var(--sub);
       letter-spacing: 0.04em;
-      text-transform: uppercase;
     }
     .hero-number {
       font-size: 52px;
@@ -135,23 +132,15 @@
       margin-left: 4px;
       letter-spacing: 0;
     }
-    .hero-sub {
-      font-size: 12px;
-      color: var(--sub);
-    }
+    .hero-sub { font-size: 12px; color: var(--sub); }
     .hero-metrics {
       display: grid;
       grid-template-columns: 1fr 1fr;
       padding-top: 16px;
       gap: 12px;
     }
-    .metric-item {
-      text-align: center;
-      padding: 4px 0;
-    }
-    .metric-item:first-child {
-      border-right: 1px solid var(--border);
-    }
+    .metric-item { text-align: center; padding: 4px 0; }
+    .metric-item:first-child { border-right: 1px solid var(--border); }
     .metric-val {
       font-size: 20px;
       font-weight: 700;
@@ -159,7 +148,7 @@
       margin-top: 4px;
     }
 
-    /* 2. 今日打卡卡片（严格按单行流式排版） */
+    /* 2. 今日打卡卡片 */
     .card-header {
       display: flex;
       justify-content: space-between;
@@ -183,7 +172,6 @@
       outline: none;
     }
 
-    /* 状态面板：第一行已记摄入/体重，第二行当日差值 */
     .status-panel {
       background: var(--field);
       border-radius: 18px;
@@ -222,13 +210,8 @@
       transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease;
     }
 
-    /* 输入框容器（独占一行 + 右侧单位标签） */
-    .input-group {
-      margin-bottom: 16px;
-    }
-    .input-group:last-child {
-      margin-bottom: 0;
-    }
+    .input-group { margin-bottom: 16px; }
+    .input-group:last-child { margin-bottom: 0; }
     .input-box {
       position: relative;
       width: 100%;
@@ -265,16 +248,12 @@
       pointer-events: none;
     }
 
-    /* 按钮排版：热量双按钮一行，体重单按钮一行 */
     .btn-dual-row {
       display: grid;
       grid-template-columns: 1.25fr 1fr;
       gap: 10px;
     }
-    .btn-single-row {
-      display: block;
-      width: 100%;
-    }
+    .btn-single-row { display: block; width: 100%; }
     .btn {
       width: 100%;
       padding: 14px 16px;
@@ -289,31 +268,14 @@
       align-items: center;
       gap: 6px;
     }
-    .btn:active {
-      transform: scale(0.97);
-      opacity: 0.9;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #ffffff;
-    }
-    .btn-tinted {
-      background: var(--accent-soft);
-      color: var(--accent);
-    }
-    .btn-neutral {
-      background: var(--field);
-      color: var(--text);
-    }
+    .btn:active { transform: scale(0.97); opacity: 0.9; }
+    .btn-primary { background: var(--accent); color: #ffffff; }
+    .btn-tinted { background: var(--accent-soft); color: var(--accent); }
+    .btn-neutral { background: var(--field); color: var(--text); }
 
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 18px 0;
-    }
-
-    /* 折叠面板与表单 */
+    .divider { height: 1px; background: var(--border); margin: 18px 0; }
     .hidden { display: none !important; }
+
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -327,13 +289,9 @@
       color: var(--sub);
       margin-bottom: 6px;
     }
-    .form-item .raw-input, .form-item select {
-      padding: 12px 14px;
-      font-size: 15px;
-    }
+    .form-item .raw-input, .form-item select { padding: 12px 14px; font-size: 15px; }
     .full-width { grid-column: span 2; }
 
-    /* 诊断面板 */
     .diag-box {
       margin-top: 12px;
       padding: 14px 16px;
@@ -358,38 +316,146 @@
       accent-color: var(--accent);
     }
 
-    /* 历史记录列表 */
-    .log-list { list-style: none; margin-top: 6px; }
-    .log-item {
+    /* 历史记录：iOS 分段控制器与月份切换栏 */
+    .history-toolbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
+      margin: 10px 0 14px;
+      gap: 8px;
     }
-    .log-item:last-child { border-bottom: none; padding-bottom: 2px; }
-    .log-date {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 3px;
-    }
-    .log-meta {
-      font-size: 13px;
-      color: var(--sub);
-    }
-    .log-right {
+    .month-nav {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
+      background: var(--field);
+      padding: 4px 6px;
+      border-radius: 12px;
     }
-    .badge {
-      padding: 5px 10px;
-      border-radius: 999px;
-      font-size: 13px;
+    .month-btn {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 15px;
       font-weight: 700;
+      padding: 2px 8px;
+      cursor: pointer;
+      border-radius: 8px;
     }
-    .badge-plus { background: var(--green-soft); color: var(--green); }
-    .badge-minus { background: var(--red-soft); color: var(--red); }
+    .month-btn:active { background: var(--border); }
+    .month-label {
+      font-size: 13px;
+      font-weight: 600;
+      min-width: 78px;
+      text-align: center;
+    }
+    .seg-control {
+      display: inline-flex;
+      background: var(--field);
+      padding: 3px;
+      border-radius: 12px;
+    }
+    .seg-btn {
+      border: none;
+      background: transparent;
+      color: var(--sub);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .seg-btn.active {
+      background: var(--card-solid);
+      color: var(--text);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .month-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--field);
+      border-radius: 14px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .ms-item { font-size: 11px; color: var(--sub); }
+    .ms-val { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 2px; }
+
+    /* 视图 1：Apple Numbers / Excel 极简表格视图 */
+    .table-wrap { width: 100%; overflow-x: auto; }
+    .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .data-table th {
+      text-align: right;
+      color: var(--sub);
+      font-weight: 600;
+      font-size: 11px;
+      padding: 8px 6px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .data-table th:first-child,
+    .data-table td:first-child { text-align: left; padding-left: 4px; }
+    .data-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.12s ease;
+    }
+    .data-table tbody tr:last-child { border-bottom: none; }
+    .data-table tbody tr:active { background: var(--field); }
+    .data-table td {
+      padding: 12px 6px;
+      text-align: right;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    .td-date { font-weight: 600; color: var(--text); }
+    .td-sub { color: var(--sub); font-size: 12px; }
+    .td-arrow { color: var(--sub); font-size: 14px; padding-left: 2px; width: 14px; }
+    .val-plus { color: var(--green); font-weight: 700; }
+    .val-minus { color: var(--red); font-weight: 700; }
+
+    /* 视图 2：月度热力日历矩阵 */
+    .cal-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--sub);
+      margin-bottom: 6px;
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+    .cal-cell {
+      aspect-ratio: 1 / 1.08;
+      border-radius: 12px;
+      background: var(--field);
+      padding: 5px 3px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: transform 0.1s ease;
+    }
+    .cal-cell:active { transform: scale(0.94); }
+    .cal-cell.empty { background: transparent; cursor: default; }
+    .cal-cell.plus { background: var(--green-soft); border-color: rgba(52, 199, 89, 0.25); }
+    .cal-cell.minus { background: var(--red-soft); border-color: rgba(255, 59, 48, 0.25); }
+    .cal-day { font-size: 11px; font-weight: 600; color: var(--sub); }
+    .cal-cell.plus .cal-day, .cal-cell.minus .cal-day { color: var(--text); }
+    .cal-diff { font-size: 11px; font-weight: 700; line-height: 1; }
+    .cal-cell.plus .cal-diff { color: var(--green); }
+    .cal-cell.minus .cal-diff { color: var(--red); }
+    .cal-jin { font-size: 9px; color: var(--sub); }
+
     .icon-btn {
       background: var(--field);
       border: none;
@@ -400,7 +466,6 @@
       font-weight: 600;
       cursor: pointer;
     }
-    .icon-btn:active { transform: scale(0.94); }
 
     /* iOS 原生感毛玻璃编辑弹窗 */
     .modal-backdrop {
@@ -468,7 +533,6 @@
       <input type="date" id="logDate" class="date-picker" onchange="renderTodayStatus()" />
     </div>
 
-    <!-- 状态面板：第一行已记摄入/体重，第二行当日差值 -->
     <div class="status-panel">
       <div class="status-line-1">
         <span id="todayIntakeText">已记摄入：0 kcal</span>
@@ -483,7 +547,6 @@
       </div>
     </div>
 
-    <!-- 热量录入区：第一行输入框，第二行「+ 累加」与「改总数」 -->
     <div class="input-group">
       <div class="input-box">
         <input type="number" id="dailyInput" placeholder="输入本餐 / 今日热量" inputmode="numeric" />
@@ -497,7 +560,6 @@
 
     <div class="divider"></div>
 
-    <!-- 体重录入区：第一行输入框，第二行「存体重」 -->
     <div class="input-group">
       <div class="input-box">
         <input type="number" id="dailyWeight" placeholder="选填：今日空腹体重" inputmode="decimal" step="0.1" />
@@ -509,7 +571,7 @@
     </div>
   </section>
 
-  <!-- 3. 平台期诊断与代谢校准面板（默认折叠） -->
+  <!-- 3. 平台期诊断与代谢校准面板 -->
   <section class="card hidden" id="plateauCard">
     <div class="card-header" style="margin-bottom:6px;">
       <span class="card-title">平台期诊断与校准</span>
@@ -542,7 +604,7 @@
     </div>
   </section>
 
-  <!-- 4. 身体参数与提醒设置（默认折叠） -->
+  <!-- 4. 身体参数与提醒设置 -->
   <section class="card hidden" id="settingsCard">
     <div class="card-header" style="margin-bottom:4px;">
       <span class="card-title">身体参数与提醒</span>
@@ -593,13 +655,61 @@
     </div>
   </section>
 
-  <!-- 5. 历史记录 -->
+  <!-- 5. 历史记录（支持 Excel 表格视图 & 月历热力图一键切换） -->
   <section class="card">
-    <div class="card-header" style="margin-bottom:6px;">
-      <span class="card-title">历史记录</span>
-      <button class="icon-btn" style="color:var(--sub);" onclick="clearAllLogs()">清空</button>
+    <div class="card-header" style="margin-bottom:4px;">
+      <span class="card-title">数据视图</span>
+      <button class="icon-btn" style="color:var(--sub);" onclick="clearAllLogs()">清空全部</button>
     </div>
-    <ul class="log-list" id="logList"></ul>
+
+    <div class="history-toolbar">
+      <div class="month-nav">
+        <button class="month-btn" onclick="changeMonth(-1)">‹</button>
+        <span class="month-label" id="currentMonthLabel">2026-11</span>
+        <button class="month-btn" onclick="changeMonth(1)">›</button>
+      </div>
+      <div class="seg-control">
+        <button class="seg-btn active" id="btnViewTable" onclick="switchHistoryView('table')">表格明细</button>
+        <button class="seg-btn" id="btnViewCal" onclick="switchHistoryView('calendar')">月历热力</button>
+      </div>
+    </div>
+
+    <div class="month-summary">
+      <div class="ms-item">本月打卡<div class="ms-val" id="msDays">0 天</div></div>
+      <div class="ms-item">本月净差值<div class="ms-val" id="msDeficit">0 kcal</div></div>
+      <div class="ms-item">本月折合减重<div class="ms-val" id="msJin">0.00 斤</div></div>
+    </div>
+
+    <!-- 视图 A：Excel / Numbers 极简对齐表格 -->
+    <div id="tableViewBox" class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>日期</th>
+            <th>摄入</th>
+            <th>热量差</th>
+            <th>折算</th>
+            <th>体重</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="logTableBody"></tbody>
+      </table>
+      <div style="text-align:center; font-size:11px; color:var(--sub); margin-top:10px;">
+        💡 提示：直接点击任意一行即可修改或删除该日数据
+      </div>
+    </div>
+
+    <!-- 视图 B：月度热力日历矩阵 -->
+    <div id="calendarViewBox" class="hidden">
+      <div class="cal-weekdays">
+        <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+      </div>
+      <div class="cal-grid" id="calendarGrid"></div>
+      <div style="text-align:center; font-size:11px; color:var(--sub); margin-top:10px;">
+        🟢 绿格：热量缺口达标 ｜ 🔴 红格：热量超标（点击格子可修改）
+      </div>
+    </div>
   </section>
 
   <!-- 6. iOS 风格修改历史记录弹窗 -->
@@ -639,9 +749,13 @@
     };
     let logs = JSON.parse(localStorage.getItem(LOGS_KEY)) || [];
     let editingDate = null;
+    let currentViewMode = 'table';
+    let currentViewMonth = new Date().toISOString().slice(0, 7);
 
     function init() {
-      document.getElementById('logDate').value = new Date().toISOString().split('T')[0];
+      const todayStr = new Date().toISOString().split('T')[0];
+      document.getElementById('logDate').value = todayStr;
+      currentViewMonth = todayStr.slice(0, 7);
       document.getElementById('gender').value = profile.gender;
       document.getElementById('age').value = profile.age;
       document.getElementById('height').value = profile.height;
@@ -678,7 +792,6 @@
       render();
     }
 
-    // 录入热量：mode = 'add'（累加）或 'set'（改总数）
     function saveDailyLog(mode) {
       const inputEl = document.getElementById('dailyInput');
       if (inputEl.value === '') return;
@@ -698,12 +811,12 @@
         logs.sort((a, b) => b.date.localeCompare(a.date));
       }
 
+      currentViewMonth = date.slice(0, 7);
       localStorage.setItem(LOGS_KEY, JSON.stringify(logs));
       inputEl.value = '';
       render();
     }
 
-    // 单独存体重
     function saveWeightOnly() {
       const weightEl = document.getElementById('dailyWeight');
       if (weightEl.value === '') return;
@@ -718,12 +831,12 @@
         logs.unshift({ date, intake: 0, tdee, diff: tdee, weightJin });
         logs.sort((a, b) => b.date.localeCompare(a.date));
       }
+      currentViewMonth = date.slice(0, 7);
       localStorage.setItem(LOGS_KEY, JSON.stringify(logs));
       weightEl.value = '';
       render();
     }
 
-    // 打开 iOS 风格修改弹窗
     function openEditModal(date) {
       const item = logs.find(l => l.date === date);
       if (!item) return;
@@ -777,7 +890,6 @@
       if (id === 'plateauCard') runPlateauAnalysis();
     }
 
-    // 渲染今日状态面板与动态能量条
     function renderTodayStatus() {
       const date = document.getElementById('logDate').value;
       const item = logs.find(l => l.date === date);
@@ -811,7 +923,6 @@
       }
     }
 
-    // 平台期诊断引擎
     function runPlateauAnalysis() {
       const diagEl = document.getElementById('autoDiagResult');
       const adviceEl = document.getElementById('adviceBox');
@@ -870,7 +981,6 @@
       render();
     }
 
-    // 生成手机日历提醒 (.ics)
     function downloadCalendarReminder() {
       const timeStr = (profile.remindTime || '21:30').replace(':', '') + '00';
       const now = new Date();
@@ -920,6 +1030,24 @@
       }, 60000);
     }
 
+    function switchHistoryView(mode) {
+      currentViewMode = mode;
+      document.getElementById('btnViewTable').classList.toggle('active', mode === 'table');
+      document.getElementById('btnViewCal').classList.toggle('active', mode === 'calendar');
+      document.getElementById('tableViewBox').classList.toggle('hidden', mode !== 'table');
+      document.getElementById('calendarViewBox').classList.toggle('hidden', mode !== 'calendar');
+      render();
+    }
+
+    function changeMonth(delta) {
+      const [y, m] = currentViewMonth.split('-').map(Number);
+      const d = new Date(y, m - 1 + delta, 1);
+      const ny = d.getFullYear();
+      const nm = String(d.getMonth() + 1).padStart(2, '0');
+      currentViewMonth = `${ny}-${nm}`;
+      render();
+    }
+
     function render() {
       const tdee = calcTDEE();
       const totalDeficit = logs.reduce((sum, item) => sum + item.diff, 0);
@@ -932,27 +1060,81 @@
 
       renderTodayStatus();
 
-      const listEl = document.getElementById('logList');
-      if (logs.length === 0) {
-        listEl.innerHTML = '<li class="log-item" style="color:var(--sub); font-size:14px;">暂无记录，在上方输入今日热量即可累加</li>';
-        return;
+      const [yearStr, monthStr] = currentViewMonth.split('-');
+      document.getElementById('currentMonthLabel').textContent = `${yearStr}年${Number(monthStr)}月`;
+
+      const monthLogs = logs.filter(item => item.date.startsWith(currentViewMonth));
+      const monthDeficit = monthLogs.reduce((sum, item) => sum + item.diff, 0);
+      const monthJin = (monthDeficit / profile.kcalPerJin).toFixed(2);
+
+      document.getElementById('msDays').textContent = `${monthLogs.length} 天`;
+      document.getElementById('msDeficit').textContent = (monthDeficit >= 0 ? '+' : '') + monthDeficit + ' kcal';
+      document.getElementById('msDeficit').style.color = monthDeficit >= 0 ? 'var(--green)' : 'var(--red)';
+      document.getElementById('msJin').textContent = `${monthJin >= 0 ? '+' : ''}${monthJin} 斤`;
+
+      const tbody = document.getElementById('logTableBody');
+      if (monthLogs.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--sub); padding:24px 0;">本月暂无打卡记录</td></tr>`;
+      } else {
+        const weekMap = ['日', '一', '二', '三', '四', '五', '六'];
+        tbody.innerHTML = monthLogs.map(item => {
+          const isPlus = item.diff >= 0;
+          const sign = isPlus ? '+' : '';
+          const itemJin = (item.diff / profile.kcalPerJin).toFixed(2);
+          const dObj = new Date(item.date + 'T00:00:00');
+          const shortDate = `${item.date.slice(5)} 周${weekMap[dObj.getDay()]}`;
+          const weightCell = item.weightJin ? `${item.weightJin}斤` : '--';
+
+          return `<tr onclick="openEditModal('${item.date}')">
+            <td class="td-date">${shortDate}</td>
+            <td>${item.intake}</td>
+            <td class="${isPlus ? 'val-plus' : 'val-minus'}">${sign}${item.diff}</td>
+            <td class="${isPlus ? 'val-plus' : 'val-minus'}">${sign}${itemJin}斤</td>
+            <td class="td-sub">${weightCell}</td>
+            <td class="td-arrow">›</td>
+          </tr>`;
+        }).join('');
       }
-      listEl.innerHTML = logs.map(item => {
-        const isPlus = item.diff >= 0;
-        const sign = isPlus ? '+' : '';
-        const itemJin = (item.diff / profile.kcalPerJin).toFixed(2);
-        const weightStr = item.weightJin ? ` · 体重 ${item.weightJin}斤` : '';
-        return `<li class="log-item">
-          <div>
-            <div class="log-date">${item.date}</div>
-            <div class="log-meta">摄入 ${item.intake} kcal${weightStr}</div>
-          </div>
-          <div class="log-right">
-            <span class="badge ${isPlus ? 'badge-plus' : 'badge-minus'}">${sign}${item.diff} (${sign}${itemJin}斤)</span>
-            <button class="icon-btn" onclick="openEditModal('${item.date}')">修改</button>
-          </div>
-        </li>`;
-      }).join('');
+
+      const calGrid = document.getElementById('calendarGrid');
+      const y = Number(yearStr);
+      const m = Number(monthStr);
+      const firstDayWeek = (new Date(y, m - 1, 1).getDay() + 6) % 7;
+      const daysInMonth = new Date(y, m, 0).getDate();
+
+      let cellsHtml = '';
+      for (let i = 0; i < firstDayWeek; i++) {
+        cellsHtml += `<div class="cal-cell empty"></div>`;
+      }
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateKey = `${yearStr}-${monthStr}-${String(d).padStart(2, '0')}`;
+        const logItem = monthLogs.find(l => l.date === dateKey);
+        if (logItem) {
+          const isPlus = logItem.diff >= 0;
+          const sign = isPlus ? '+' : '';
+          const jinVal = (logItem.diff / profile.kcalPerJin).toFixed(1);
+          cellsHtml += `
+            <div class="cal-cell ${isPlus ? 'plus' : 'minus'}" onclick="openEditModal('${dateKey}')">
+              <span class="cal-day">${d}</span>
+              <span class="cal-diff">${sign}${logItem.diff}</span>
+              <span class="cal-jin">${sign}${jinVal}斤</span>
+            </div>`;
+        } else {
+          cellsHtml += `
+            <div class="cal-cell" onclick="quickPickDate('${dateKey}')">
+              <span class="cal-day">${d}</span>
+              <span class="cal-diff" style="color:var(--sub); font-weight:400;">-</span>
+              <span class="cal-jin"></span>
+            </div>`;
+        }
+      }
+      calGrid.innerHTML = cellsHtml;
+    }
+
+    function quickPickDate(dateKey) {
+      document.getElementById('logDate').value = dateKey;
+      renderTodayStatus();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     init();
