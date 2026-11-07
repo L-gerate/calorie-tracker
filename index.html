@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <!-- 让网页添加到手机桌面后像原生App一样全屏运行，隐藏浏览器地址栏 -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="热量差" />
@@ -11,141 +10,86 @@
   <title>热量差记录</title>
   <style>
     :root {
-      --bg: #f2f2f7;
-      --card: #ffffff;
-      --text: #1c1c1e;
-      --sub: #8e8e93;
-      --accent: #007aff;
-      --green: #34c759;
-      --red: #ff3b30;
-      --border: #e5e5ea;
+      --bg: #f2f2f7; --card: #ffffff; --text: #1c1c1e; --sub: #8e8e93;
+      --accent: #007aff; --green: #34c759; --orange: #ff9500; --red: #ff3b30; --border: #e5e5ea;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #000000;
-        --card: #1c1c1e;
-        --text: #ffffff;
-        --sub: #98989d;
-        --accent: #0a84ff;
-        --green: #30d158;
-        --red: #ff453a;
-        --border: #2c2c2e;
+        --bg: #000000; --card: #1c1c1e; --text: #ffffff; --sub: #98989d;
+        --accent: #0a84ff; --green: #30d158; --orange: #ff9f0a; --red: #ff453a; --border: #2c2c2e;
       }
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      padding: env(safe-area-inset-top, 20px) 16px calc(env(safe-area-inset-bottom, 20px) + 20px);
-      max-width: 480px;
-      margin: 0 auto;
+      background: var(--bg); color: var(--text);
+      padding: env(safe-area-inset-top, 16px) 16px calc(env(safe-area-inset-bottom, 20px) + 24px);
+      max-width: 480px; margin: 0 auto;
     }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 4px 16px;
-    }
-    header h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
-    .btn-text {
-      background: none; border: none; color: var(--accent);
-      font-size: 15px; font-weight: 500; cursor: pointer;
-    }
-    .card {
-      background: var(--card);
-      border-radius: 16px;
-      padding: 18px;
-      margin-bottom: 14px;
-    }
-    /* 核心数据看板 */
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .hero-main {
-      grid-column: span 2;
-      text-align: center;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
-    }
-    .label { font-size: 13px; color: var(--sub); margin-bottom: 4px; }
-    .big-num { font-size: 40px; font-weight: 700; color: var(--green); line-height: 1.1; }
-    .big-num span { font-size: 16px; font-weight: 500; color: var(--text); margin-left: 4px; }
-    .stat-box { text-align: center; padding-top: 6px; }
-    .stat-val { font-size: 20px; font-weight: 600; }
-    /* 今日打卡区 */
-    .input-row {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 10px 4px 14px; }
+    header h1 { font-size: 22px; font-weight: 700; }
+    .top-actions { display: flex; gap: 12px; }
+    .btn-text { background: none; border: none; color: var(--accent); font-size: 14px; font-weight: 500; cursor: pointer; }
+    .card { background: var(--card); border-radius: 16px; padding: 16px; margin-bottom: 14px; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .hero-main { grid-column: span 2; text-align: center; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .label { font-size: 12px; color: var(--sub); margin-bottom: 4px; }
+    .big-num { font-size: 38px; font-weight: 700; color: var(--green); line-height: 1.1; }
+    .big-num span { font-size: 15px; font-weight: 500; color: var(--text); margin-left: 4px; }
+    .stat-box { text-align: center; padding-top: 4px; }
+    .stat-val { font-size: 19px; font-weight: 600; }
+    .input-row { display: flex; gap: 8px; margin-top: 10px; }
     input, select {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      color: var(--text);
-      font-size: 16px;
-      outline: none;
+      width: 100%; padding: 11px 12px; border-radius: 12px;
+      border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 15px; outline: none;
     }
     .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      padding: 0 20px;
-      font-size: 16px;
-      font-weight: 600;
-      white-space: nowrap;
-      cursor: pointer;
+      background: var(--accent); color: #fff; border: none; border-radius: 12px;
+      padding: 0 16px; font-size: 15px; font-weight: 600; white-space: nowrap; cursor: pointer;
     }
-    .preview-bar {
-      margin-top: 10px;
-      font-size: 13px;
-      color: var(--sub);
-      display: flex;
-      justify-content: space-between;
+    .btn-secondary {
+      background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 12px;
+      padding: 0 12px; font-size: 14px; font-weight: 500; white-space: nowrap; cursor: pointer;
     }
-    /* 身体参数设置折叠区 */
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
+    .today-status {
+      margin-top: 10px; padding: 10px 12px; background: var(--bg); border-radius: 10px;
+      font-size: 13px; display: flex; justify-content: space-between; align-items: center;
     }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
     .form-item label { display: block; font-size: 12px; color: var(--sub); margin-bottom: 4px; }
     .full-width { grid-column: span 2; }
     .hidden { display: none; }
-    /* 历史记录列表 */
     .log-list { list-style: none; margin-top: 8px; }
     .log-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 11px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 14px;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 11px 0; border-bottom: 1px solid var(--border); font-size: 13px;
     }
     .log-item:last-child { border-bottom: none; }
     .tag-plus { color: var(--green); font-weight: 600; }
     .tag-minus { color: var(--red); font-weight: 600; }
-    .del-btn {
-      background: none; border: none; color: var(--sub);
-      font-size: 13px; margin-left: 10px; cursor: pointer;
+    .action-btn {
+      background: var(--bg); border: 1px solid var(--border); color: var(--text);
+      border-radius: 6px; padding: 3px 8px; font-size: 12px; margin-left: 6px; cursor: pointer;
     }
+    .diag-box {
+      margin-top: 10px; padding: 12px; border-radius: 12px;
+      background: var(--bg); font-size: 13px; line-height: 1.5;
+    }
+    .check-row { display: flex; align-items: center; gap: 8px; margin: 8px 0; font-size: 13px; }
+    .check-row input { width: 18px; height: 18px; }
   </style>
 </head>
 <body>
 
   <header>
     <h1>热量差</h1>
-    <button class="btn-text" onclick="toggleSettings()">身体参数 / 提醒</button>
+    <div class="top-actions">
+      <button class="btn-text" onclick="toggleCard('plateauCard')">平台期诊断</button>
+      <button class="btn-text" onclick="toggleCard('settingsCard')">参数 / 提醒</button>
+    </div>
   </header>
 
-  <!-- 1. 顶部核心看板 -->
+  <!-- 1. 核心数据看板 -->
   <div class="card hero-grid">
     <div class="hero-main">
       <div class="label">累计热量缺口折合减重</div>
@@ -162,25 +106,58 @@
     </div>
   </div>
 
-  <!-- 2. 今日快速记录 -->
+  <!-- 2. 今日打卡区（支持分餐累加 + 体重记录） -->
   <div class="card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
-      <span style="font-weight:600; font-size:16px;">今日记录</span>
-      <input type="date" id="logDate" style="width:auto; padding:4px 8px; font-size:13px;" />
+      <span style="font-weight:600; font-size:16px;">记录热量与体重</span>
+      <input type="date" id="logDate" style="width:auto; padding:4px 8px; font-size:13px;" onchange="renderTodayStatus()" />
     </div>
+
+    <div class="today-status" id="todayStatusBox">
+      <span id="todayStatusText">所选日期已记摄入：0 kcal</span>
+      <span id="todayDiffText" style="font-weight:600;">差值 --</span>
+    </div>
+
     <div class="input-row">
-      <input type="number" id="dailyInput" placeholder="输入今日饮食摄入 (kcal)" inputmode="numeric" oninput="updatePreview()" />
-      <button class="btn-primary" onclick="saveDailyLog()">记录</button>
+      <input type="number" id="dailyInput" placeholder="输入本餐/今日热量 (kcal)" inputmode="numeric" />
+      <button class="btn-primary" onclick="saveDailyLog('add')">+ 累加</button>
+      <button class="btn-secondary" onclick="saveDailyLog('set')" title="直接覆盖当天总热量">改总数</button>
     </div>
-    <div class="preview-bar">
-      <span id="previewText">今日差值 = 每日燃烧 - 今日摄入</span>
-      <span id="previewVal" style="font-weight:600;">-- kcal</span>
+
+    <div class="input-row" style="margin-top:8px;">
+      <input type="number" id="dailyWeight" placeholder="选填：今日空腹体重（斤，用于平台期分析）" inputmode="decimal" step="0.1" />
+      <button class="btn-secondary" onclick="saveWeightOnly()">存体重</button>
     </div>
   </div>
 
-  <!-- 3. 身体参数与提醒设置（默认折叠） -->
+  <!-- 3. 平台期诊断与代谢校准面板（默认折叠） -->
+  <div class="card hidden" id="plateauCard">
+    <div style="font-weight:600; font-size:16px;">平台期诊断与代谢校准</div>
+    <p style="font-size:12px; color:var(--sub); margin-top:4px;">
+      对比你的「账面累计减重」与「实际体重变化」，定位是饮食少算了，还是代谢适应/运动高估。
+    </p>
+
+    <div class="diag-box" id="autoDiagResult">正在读取记录...</div>
+
+    <div style="margin-top:12px; font-weight:600; font-size:13px;">勾选你近期的情况（辅助定位原因）：</div>
+    <label class="check-row"><input type="checkbox" id="chk_oil" onchange="runPlateauAnalysis()" /> 每周外卖/食堂 ≥ 4次，或未精确称量炒菜油/酱料</label>
+    <label class="check-row"><input type="checkbox" id="chk_seat" onchange="runPlateauAnalysis()" /> 选了运动系数，但除运动那1小时外全天久坐</label>
+    <label class="check-row"><input type="checkbox" id="chk_cold" onchange="runPlateauAnalysis()" /> 已连续控制饮食超4周，近期感觉怕冷、犯困或乏力</label>
+
+    <div class="diag-box" id="adviceBox" style="margin-top:8px; color:var(--text);">
+      勾选上方选项或录入至少 2 次不同日期的体重后，这里将生成校准建议。
+    </div>
+
+    <div class="input-row" style="margin-top:10px;">
+      <input type="number" id="customTdeeInput" placeholder="手动校准每日燃烧值 (kcal)" inputmode="numeric" />
+      <button class="btn-primary" onclick="applyCustomTdee()">应用校准</button>
+      <button class="btn-secondary" onclick="resetCustomTdee()">恢复公式</button>
+    </div>
+  </div>
+
+  <!-- 4. 身体参数与提醒设置（默认折叠） -->
   <div class="card hidden" id="settingsCard">
-    <div style="font-weight:600; font-size:16px; margin-bottom:4px;">身体参数与提醒</div>
+    <div style="font-weight:600; font-size:16px; margin-bottom:4px;">身体参数与每日提醒</div>
     <div class="form-grid">
       <div class="form-item">
         <label>性别</label>
@@ -198,7 +175,7 @@
         <input type="number" id="height" value="177" inputmode="decimal" onchange="saveProfile()" />
       </div>
       <div class="form-item">
-        <label>体重 (kg)</label>
+        <label>初始体重 (kg)</label>
         <input type="number" id="weight" value="70" inputmode="decimal" onchange="saveProfile()" />
       </div>
       <div class="form-item full-width">
@@ -216,26 +193,33 @@
       </div>
       <div class="form-item">
         <label>每日提醒时间</label>
-        <input type="time" id="remindTime" value="21:30" onchange="setupReminder()" />
+        <input type="time" id="remindTime" value="21:30" onchange="saveProfile()" />
+      </div>
+      <div class="form-item full-width" style="margin-top:4px;">
+        <button class="btn-primary" style="width:100%; padding:11px;" onclick="downloadCalendarReminder()">
+          🔔 一键添加手机系统每日日历提醒（防杀后台）
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- 4. 历史明细 -->
+  <!-- 5. 历史记录（支持单条修改与删除） -->
   <div class="card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
-      <span style="font-weight:600; font-size:15px;">历史记录</span>
+      <span style="font-weight:600; font-size:15px;">历史记录（点击“改”可修正任意一天）</span>
       <button class="btn-text" style="font-size:13px; color:var(--sub);" onclick="clearAllLogs()">清空</button>
     </div>
     <ul class="log-list" id="logList"></ul>
   </div>
 
   <script>
-    const PROFILE_KEY = 'cal_profile_v1';
-    const LOGS_KEY = 'cal_logs_v1';
+    const PROFILE_KEY = 'cal_profile_v2';
+    const LOGS_KEY = 'cal_logs_v1'; // 保持与旧版记录兼容
 
-    let profile = JSON.parse(localStorage.getItem(PROFILE_KEY)) || {
-      gender: 'male', age: 23, height: 177, weight: 70, activity: 1.375, kcalPerJin: 3850, remindTime: '21:30'
+    let profile = JSON.parse(localStorage.getItem(PROFILE_KEY)) ||
+                  JSON.parse(localStorage.getItem('cal_profile_v1')) || {
+      gender: 'male', age: 23, height: 177, weight: 73.5, activity: 1.375,
+      kcalPerJin: 3850, remindTime: '21:30', customTdee: null
     };
     let logs = JSON.parse(localStorage.getItem(LOGS_KEY)) || [];
 
@@ -246,63 +230,103 @@
       document.getElementById('height').value = profile.height;
       document.getElementById('weight').value = profile.weight;
       document.getElementById('activity').value = profile.activity;
-      document.getElementById('kcalPerJin').value = profile.kcalPerJin;
+      document.getElementById('kcalPerJin').value = profile.kcalPerJin || 3850;
       document.getElementById('remindTime').value = profile.remindTime || '21:30';
+      if (profile.customTdee) {
+        document.getElementById('customTdeeInput').value = profile.customTdee;
+      }
       render();
-      checkDailyNotification();
+      checkWebNotification();
     }
 
-    function calcTDEE() {
+    function calcFormulaTDEE() {
       const s = profile.gender === 'male' ? 5 : -161;
       const bmr = 10 * profile.weight + 6.25 * profile.height - 5 * profile.age + s;
       return Math.round(bmr * profile.activity);
     }
 
+    function calcTDEE() {
+      return profile.customTdee ? Number(profile.customTdee) : calcFormulaTDEE();
+    }
+
     function saveProfile() {
-      profile = {
-        gender: document.getElementById('gender').value,
-        age: Number(document.getElementById('age').value) || 23,
-        height: Number(document.getElementById('height').value) || 177,
-        weight: Number(document.getElementById('weight').value) || 70,
-        activity: Number(document.getElementById('activity').value) || 1.375,
-        kcalPerJin: Number(document.getElementById('kcalPerJin').value) || 3850,
-        remindTime: document.getElementById('remindTime').value
-      };
+      profile.gender = document.getElementById('gender').value;
+      profile.age = Number(document.getElementById('age').value) || 23;
+      profile.height = Number(document.getElementById('height').value) || 177;
+      profile.weight = Number(document.getElementById('weight').value) || 70;
+      profile.activity = Number(document.getElementById('activity').value) || 1.375;
+      profile.kcalPerJin = Number(document.getElementById('kcalPerJin').value) || 3850;
+      profile.remindTime = document.getElementById('remindTime').value;
       localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
       render();
     }
 
-    function updatePreview() {
-      const val = document.getElementById('dailyInput').value;
-      const previewVal = document.getElementById('previewVal');
-      if (!val) { previewVal.textContent = '-- kcal'; return; }
-      const diff = calcTDEE() - Number(val);
-      previewVal.textContent = (diff >= 0 ? '+' : '') + diff + ' kcal';
-      previewVal.style.color = diff >= 0 ? 'var(--green)' : 'var(--red)';
-    }
-
-    function saveDailyLog() {
+    // 支持 'add' (分餐累加) 和 'set' (直接覆盖当天总数)
+    function saveDailyLog(mode) {
       const inputEl = document.getElementById('dailyInput');
+      const weightEl = document.getElementById('dailyWeight');
       if (inputEl.value === '') return;
-      const intake = Number(inputEl.value);
+
+      const val = Number(inputEl.value);
       const date = document.getElementById('logDate').value;
       const tdee = calcTDEE();
-      const diff = tdee - intake;
-
       const idx = logs.findIndex(item => item.date === date);
+
+      let newIntake = val;
+      let weightJin = weightEl.value !== '' ? Number(weightEl.value) : (idx > -1 ? logs[idx].weightJin : null);
+
       if (idx > -1) {
-        logs[idx] = { date, intake, tdee, diff };
+        newIntake = (mode === 'add') ? (Number(logs[idx].intake) + val) : val;
+        logs[idx] = { date, intake: newIntake, tdee, diff: tdee - newIntake, weightJin };
       } else {
-        logs.unshift({ date, intake, tdee, diff });
+        logs.unshift({ date, intake: newIntake, tdee, diff: tdee - newIntake, weightJin });
+        logs.sort((a, b) => b.date.localeCompare(a.date));
+      }
+
+      localStorage.setItem(LOGS_KEY, JSON.stringify(logs));
+      inputEl.value = '';
+      render();
+    }
+
+    function saveWeightOnly() {
+      const weightEl = document.getElementById('dailyWeight');
+      if (weightEl.value === '') return;
+      const weightJin = Number(weightEl.value);
+      const date = document.getElementById('logDate').value;
+      const tdee = calcTDEE();
+      const idx = logs.findIndex(item => item.date === date);
+
+      if (idx > -1) {
+        logs[idx].weightJin = weightJin;
+      } else {
+        logs.unshift({ date, intake: tdee, tdee, diff: 0, weightJin });
         logs.sort((a, b) => b.date.localeCompare(a.date));
       }
       localStorage.setItem(LOGS_KEY, JSON.stringify(logs));
-      inputEl.value = '';
-      updatePreview();
+      render();
+    }
+
+    // 历史记录弹窗修改
+    function editLog(date) {
+      const item = logs.find(l => l.date === date);
+      if (!item) return;
+      const newIntakeStr = prompt(`修改 ${date} 的总摄入热量 (kcal)：`, item.intake);
+      if (newIntakeStr === null || newIntakeStr.trim() === '') return;
+      const newIntake = Number(newIntakeStr);
+      if (isNaN(newIntake)) return;
+
+      const newWeightStr = prompt(`修改 ${date} 的空腹体重（斤，可留空）：`, item.weightJin || '');
+      item.intake = newIntake;
+      item.diff = item.tdee - newIntake;
+      if (newWeightStr !== null && newWeightStr.trim() !== '') {
+        item.weightJin = Number(newWeightStr);
+      }
+      localStorage.setItem(LOGS_KEY, JSON.stringify(logs));
       render();
     }
 
     function deleteLog(date) {
+      if (!confirm(`确定删除 ${date} 的记录吗？`)) return;
       logs = logs.filter(item => item.date !== date);
       localStorage.setItem(LOGS_KEY, JSON.stringify(logs));
       render();
@@ -316,8 +340,143 @@
       }
     }
 
-    function toggleSettings() {
-      document.getElementById('settingsCard').classList.toggle('hidden');
+    function toggleCard(id) {
+      document.getElementById(id).classList.toggle('hidden');
+      if (id === 'plateauCard') runPlateauAnalysis();
+    }
+
+    function renderTodayStatus() {
+      const date = document.getElementById('logDate').value;
+      const item = logs.find(l => l.date === date);
+      const statusText = document.getElementById('todayStatusText');
+      const diffText = document.getElementById('todayDiffText');
+      const weightInput = document.getElementById('dailyWeight');
+
+      if (item) {
+        statusText.textContent = `${date} 已记摄入：${item.intake} kcal`;
+        const sign = item.diff >= 0 ? '+' : '';
+        diffText.textContent = `当日差值 ${sign}${item.diff} kcal`;
+        diffText.style.color = item.diff >= 0 ? 'var(--green)' : 'var(--red)';
+        weightInput.value = item.weightJin || '';
+      } else {
+        statusText.textContent = `${date} 尚未记录摄入`;
+        diffText.textContent = `燃烧基准 ${calcTDEE()} kcal`;
+        diffText.style.color = 'var(--sub)';
+        weightInput.value = '';
+      }
+    }
+
+    // 平台期诊断算法
+    function runPlateauAnalysis() {
+      const diagEl = document.getElementById('autoDiagResult');
+      const adviceEl = document.getElementById('adviceBox');
+      const weightLogs = logs.filter(l => l.weightJin && l.weightJin > 0).sort((a, b) => a.date.localeCompare(b.date));
+
+      let dailyError = 0;
+      if (weightLogs.length < 2) {
+        diagEl.innerHTML = `📊 <strong>数据积累中：</strong>目前仅有 ${weightLogs.length} 条体重记录。建议每隔几天在打卡时顺手填一下空腹体重（至少 2 次），系统即可自动计算你的「账面减重 vs 实际掉秤」偏差。`;
+      } else {
+        const first = weightLogs[0];
+        const last = weightLogs[weightLogs.length - 1];
+        const days = Math.max(1, (new Date(last.date) - new Date(first.date)) / (1000 * 3600 * 24));
+        const actualLostJin = (first.weightJin - last.weightJin).toFixed(2);
+
+        const periodLogs = logs.filter(l => l.date >= first.date && l.date <= last.date);
+        const periodDeficit = periodLogs.reduce((s, i) => s + i.diff, 0);
+        const expectedLostJin = (periodDeficit / profile.kcalPerJin).toFixed(2);
+        dailyError = Math.round(((expectedLostJin - actualLostJin) * profile.kcalPerJin) / days);
+
+        diagEl.innerHTML = `
+          <div>📅 统计区间：${first.date} 至 ${last.date}（共 ${days} 天）</div>
+          <div>📉 账面理应减重：<strong>${expectedLostJin} 斤</strong> | 实际体重变化：<strong>${actualLostJin} 斤</strong></div>
+          <div>⚠️ 日均热量偏差：<strong>${dailyError > 0 ? '+' + dailyError : dailyError} kcal/天</strong></div>
+        `;
+      }
+
+      const isOil = document.getElementById('chk_oil').checked;
+      const isSeat = document.getElementById('chk_seat').checked;
+      const isCold = document.getElementById('chk_cold').checked;
+
+      let reasons = [];
+      if (isOil) reasons.push('<strong>饮食隐形热量低估：</strong>外卖/炒菜底油和酱料极易带来每天 200~350 kcal 的隐形摄入，建议后续记录堂食/外卖时直接多加 200 kcal。');
+      if (isSeat) reasons.push('<strong>运动消耗高估（运动代偿）：</strong>每周运动 1~3 次但其余时间久坐，身体会在运动后下意识减少日常活动。建议将运动系数从 1.375 下调至 1.2，或者直接将每日燃烧值下调 150~200 kcal。');
+      if (isCold) reasons.push('<strong>长期节食导致代谢适应（节能模式）：</strong>身体感知到长期热量缺口后下调了非运动消耗（NEAT）。建议安排 2 天吃回每日燃烧值（多吃米饭/燕麦等碳水，少吃油脂）重启瘦素水平，并将燃烧基准下调 8%~10%。');
+
+      if (reasons.length === 0 && dailyError > 250) {
+        reasons.push(`检测到日均存在约 ${dailyError} kcal 的未解释偏差，建议在下方直接将每日燃烧校准为 <strong>${calcFormulaTDEE() - dailyError} kcal</strong>。`);
+      } else if (reasons.length === 0) {
+        reasons.push('当前账面热量与身体代谢基本吻合，继续保持即可！');
+      }
+      adviceEl.innerHTML = reasons.join('<br><br>');
+    }
+
+    function applyCustomTdee() {
+      const val = Number(document.getElementById('customTdeeInput').value);
+      if (!val || val < 800) return;
+      profile.customTdee = val;
+      localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+      render();
+      alert(`已将每日燃烧值校准为 ${val} kcal`);
+    }
+
+    function resetCustomTdee() {
+      profile.customTdee = null;
+      document.getElementById('customTdeeInput').value = '';
+      localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+      render();
+    }
+
+    // 生成手机系统日历 .ics 提醒文件（彻底解决网页后台被杀问题）
+    function downloadCalendarReminder() {
+      const timeStr = (profile.remindTime || '21:30').replace(':', '') + '00';
+      const now = new Date();
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth() + 1).padStart(2, '0');
+      const dd = String(now.getDate()).padStart(2, '0');
+      const appUrl = window.location.href;
+
+      const icsContent = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//CalorieTracker//CN',
+        'BEGIN:VEVENT',
+        `DTSTART:${yyyy}${mm}${dd}T${timeStr}`,
+        `DTEND:${yyyy}${mm}${dd}T${timeStr}`,
+        'RRULE:FREQ=DAILY',
+        'SUMMARY:🔥 记录今日卡路里与体重',
+        `DESCRIPTION:点击直接打开热量差记录：${appUrl}`,
+        `URL:${appUrl}`,
+        'BEGIN:VALARM',
+        'TRIGGER:-PT0M',
+        'ACTION:DISPLAY',
+        'DESCRIPTION:记录今日卡路里',
+        'END:VALARM',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'calorie-reminder.ics';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function checkWebNotification() {
+      if ('Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission();
+      }
+      setInterval(() => {
+        const now = new Date();
+        const hm = now.toTimeString().slice(0, 5);
+        const today = now.toISOString().split('T')[0];
+        const hasToday = logs.some(l => l.date === today);
+        if (hm === profile.remindTime && !hasToday && 'Notification' in window && Notification.permission === 'granted') {
+          new Notification('今日热量还未记录', { body: '花 5 秒输入今天的热量，看看累计减了多少斤！' });
+        }
+      }, 60000);
     }
 
     function render() {
@@ -325,50 +484,35 @@
       const totalDeficit = logs.reduce((sum, item) => sum + item.diff, 0);
       const jin = (totalDeficit / profile.kcalPerJin).toFixed(2);
 
-      document.getElementById('tdeeDisplay').textContent = tdee + ' kcal';
+      document.getElementById('tdeeDisplay').textContent = tdee + (profile.customTdee ? ' kcal (已校准)' : ' kcal');
       document.getElementById('totalDeficitDisplay').textContent = (totalDeficit >= 0 ? '+' : '') + totalDeficit + ' kcal';
       document.getElementById('totalJin').innerHTML = `${jin}<span>斤</span>`;
       document.getElementById('kcalPerJinNote').textContent = `按 ${profile.kcalPerJin} kcal / 斤 换算`;
 
+      renderTodayStatus();
+
       const listEl = document.getElementById('logList');
       if (logs.length === 0) {
-        listEl.innerHTML = '<li class="log-item" style="color:var(--sub);">暂无记录，在上方输入今日热量即可累加</li>';
+        listEl.innerHTML = '<li class="log-item" style="color:var(--sub);">暂无记录，在上方输入热量即可分餐累加</li>';
         return;
       }
       listEl.innerHTML = logs.map(item => {
         const cls = item.diff >= 0 ? 'tag-plus' : 'tag-minus';
         const sign = item.diff >= 0 ? '+' : '';
         const itemJin = (item.diff / profile.kcalPerJin).toFixed(2);
+        const weightBadge = item.weightJin ? ` · ${item.weightJin}斤` : '';
         return `<li class="log-item">
           <div>
             <strong>${item.date}</strong>
-            <span style="color:var(--sub); margin-left:8px;">摄入 ${item.intake} / 燃烧 ${item.tdee}</span>
+            <span style="color:var(--sub); margin-left:6px;">摄入 ${item.intake}${weightBadge}</span>
           </div>
           <div>
-            <span class="${cls}">${sign}${item.diff} kcal (${sign}${itemJin}斤)</span>
-            <button class="del-btn" onclick="deleteLog('${item.date}')">✕</button>
+            <span class="${cls}">${sign}${item.diff} (${sign}${itemJin}斤)</span>
+            <button class="action-btn" onclick="editLog('${item.date}')">改</button>
+            <button class="action-btn" onclick="deleteLog('${item.date}')">✕</button>
           </div>
         </li>`;
       }).join('');
-    }
-
-    function setupReminder() {
-      saveProfile();
-      if ('Notification' in window && Notification.permission !== 'granted') {
-        Notification.requestPermission();
-      }
-    }
-
-    function checkDailyNotification() {
-      setInterval(() => {
-        const now = new Date();
-        const currentHM = now.toTimeString().slice(0, 5);
-        const today = now.toISOString().split('T')[0];
-        const alreadyLogged = logs.some(l => l.date === today);
-        if (currentHM === profile.remindTime && !alreadyLogged && 'Notification' in window && Notification.permission === 'granted') {
-          new Notification('今日热量还未记录', { body: '花 5 秒输入今天的热量，看看累计减了多少斤！' });
-        }
-      }, 60000);
     }
 
     init();
